@@ -1,31 +1,31 @@
-#Santy/Leo Shop
+# Santy/Leo Shop
 Angular 21
 
-#🚧 Project Status: Initial Release (Work in Progress)
+## 🚧 Project Status: Initial Release (Work in Progress)
 
 This repository contains the initial release of a full-featured e-commerce application built with Angular. The project is currently under active development and already includes core functionalities such as authentication, route protection, product management, reactive forms, API integration, and administrative features.
 
 Additional improvements, testing, optimizations, and new features will be added in future releases.
 
-##Overview
+## Overview
 Teslo Shop is a modern e-commerce application built with Angular using a scalable, production-oriented architecture. The primary goal of this project is to simulate the development of a real-world application while following industry best practices and modern frontend development standards.
 
 The application demonstrates advanced Angular concepts including authentication, authorization, reactive programming, state management, image handling, and deployment strategies.
 
-#🚀 Features & Technologies
-Application Architecture
+## 🚀 Features & Technologies
+### Application Architecture
 Feature-based architecture
 Modular and scalable folder structure
 Reusable components
 Shared services and utilities
 Maintainable code organization
-UI & Styling
+### UI & Styling
 Angular
 Tailwind CSS
 DaisyUI
 Responsive design
 Static asset management (images, fonts, icons)
-Data & State Management
+### Data & State Management
 HTTP Client
 REST API Integration
 Environment configuration
@@ -39,10 +39,10 @@ Docker fundamentals
 Environment variables
 Production-ready configuration
 Deployment workflows
-#🔐 Authentication & Authorization
+### 🔐 Authentication & Authorization
 This project implements a JWT-based authentication flow similar to what is commonly used in production applications.
 
-##Topics Covered
+### Topics Covered
 JWT Authentication
 Route Guards
 HTTP Interceptors
@@ -53,10 +53,10 @@ Role-based Access Control
 DRY Principles
 The objective is to understand how modern applications secure resources and manage user permissions through Angular's ecosystem.
 
-#🛠️ Administrative Dashboard
+#### 🛠️ Administrative Dashboard
 The application includes an administration panel designed for product management and maintenance.
 
-##Features
+### Features
 Product creation
 Product updates
 Product listing
@@ -66,10 +66,10 @@ Form validation
 Authorization handling
 Cache management
 Advanced RxResource implementations
-##🖼️ Image Management
+#### 🖼️ Image Management
 The project demonstrates image handling workflows commonly found in modern web applications.
 
-##Topics Covered
+#### Topics Covered
 Image uploads
 Local image previews
 ViewChild interactions
@@ -77,14 +77,14 @@ ForkJoin
 SwitchMap
 RxJS operators in real-world scenarios
 Cache optimization
-##☁️ Deployment
+#### ☁️ Deployment
 The application is prepared for deployment using modern cloud platforms.
 
 Platforms
 Neon
 Render
 Netlify
-#🎯 Learning Outcomes
+#### 🎯 Learning Outcomes
 Through this project, developers will gain practical experience with:
 
 Enterprise-level Angular architecture
@@ -97,7 +97,7 @@ Reactive Forms
 Client-side Caching
 Deployment Workflows
 Modern Frontend Development Practices
-##🏗️ Current Status
+### 🏗️ Current Status
 Implemented
 Authentication module
 Product management
