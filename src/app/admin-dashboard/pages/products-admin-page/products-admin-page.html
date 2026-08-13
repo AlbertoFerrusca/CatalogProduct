@@ -1,0 +1,33 @@
+<h1 class="text-2xl font-bold">Listado de Productos</h1>
+<h3 class="text-lg">Total de productos
+  <span class="text-accent">{{productResources.value()?.count}}</span>
+</h3>
+<div class="divider"></div>
+
+<div class="flex  gap-2 items-center h-20">
+  <app-pagination
+  [pages]="productResources.value()?.pages??0"
+  [currentPage]="paginationService.currentPage()"
+  />
+
+  <Select
+   class="select select-bordered w-32"
+   (change)="onperPageChange($event)"
+  >
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </Select>
+
+  <div class="flex flex-1"></div> 
+  <button
+     class="btn btn-primary"
+     routerLink="/admin/products/new"  
+  > Nuevo Producto</button>
+
+</div>
+
+<product-table
+[product]="productResources.value()?.products ??[]"/>
+

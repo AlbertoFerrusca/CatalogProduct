@@ -1,0 +1,41 @@
+<form class="flex flex-col gap-2"
+[formGroup]="loginForm"
+(ngSubmit)="onSubmit()"
+>
+
+<div class="flex flex-col  max-w-md mx-auto mt-10">
+    <h2 class="text-2xl font-bold mb-4">Iniciar sesión</h2>
+
+    <label for="email" class="mb-1">Email</label>
+    <input type="email"
+    formControlName="email" placeholder="tuemail@ejemplo.com" class="input input-bordered mb-4">
+
+
+    <label for="password" class="mb-1">Contraseña</label>
+    <input type="password" class="gow"
+    formControlName="password" placeholder="Contraseña" class="input input-bordered mb-4">
+
+  </div>
+<button type="submit" class="btn btn-secondary">
+  Login
+</button>
+
+
+
+<p class="test-slate-700">
+  No tienes cuenta?
+  <a routerLink="/auth/register" class="text-secondary">Crea una aqui</a>
+</p>
+
+</form>
+
+
+@if(hasError()){
+<div role="alert" class="alert alert-error animate-fade-in fixed bottom-5 right-5 w-52">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <span>Favor de verificar la informacion </span>
+</div>
+}
+

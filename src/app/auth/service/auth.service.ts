@@ -1,0 +1,89 @@
+import { inject, Injectable, signal,computed } from '@angular/core';
+import { User } from '../interfaces/user.interface';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import {AuthResponse} from "../interfaces/auth-response.interface";
+import { catchError, map, Observable, of, tap } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
+
+
+type AuthStatus='checking'|'authenticated'|'not-authenticated'
+const baseUrl=environment.baseurl;
+
+@Injectable({providedIn: 'root'})
+
+export class AuthService {
+
+private  _autStatus=signal<AuthStatus>('checking');
+private _user=signal<User|null>(null);
+private _token=signal<string | null>(localStorage.getItem('token'));
+
+
+private http=inject(HttpClient);
+
+checkStatusResource = rxResource({
+  stream:()=>this.checkStatus(),
+});
+
+authStatus=computed<AuthStatus>(() =>{
+  if (this._autStatus() == 'checking') return 'checking';
+  if (this._user()) {
+    return 'authenticated';
+  }
+  return 'not-authenticated';
+});
+
+user=computed<User|null>(()=>this._user());
+token=computed(this._token);
+isAdmin=computed(()=>this._user()?.roles.includes('admin')??false);
+
+login(email:string, password: string ):Observable<boolean>{
+  return this.http.post<AuthResponse>(`${baseUrl}/auth/login`,
+    {email:email,
+     password:password,
+    }
+  ).pipe(
+    map(resp=>this.handledAuthSuccess(resp)),
+    catchError((error:any)=> this.handledAuthError(error))
+  );
+}
+
+//Se tendria que implementar un servicio de cache por tiempo
+// de una hora x ejemplo para no hacer peticiones
+checkStatus():Observable<boolean>{
+   const token=localStorage.getItem('token');
+   if (!token){
+    this.logout();
+    return of (false);
+   }
+   return this.http.get<AuthResponse>(`${baseUrl}/auth/check-status`,{
+   // headers:{
+   //   Authorization:`Bearer ${token}`,
+   // },
+}).pipe(
+    map(resp=>this.handledAuthSuccess(resp)),
+    catchError((error:any)=>this.handledAuthError(error)));
+  }
+
+  logout(){
+    this._user.set(null);
+    this._token.set(null);
+    this._autStatus.set('not-authenticated');
+    localStorage.removeItem('token');
+  }
+//seria en esta parte tendria que ser atraves de un map
+  private handledAuthSuccess({token,user}:AuthResponse){
+      this._user.set(user);
+      this._autStatus.set('authenticated');
+      this._token.set(token);
+      localStorage.setItem('token',token);
+      return true;
+
+  }
+
+  private handledAuthError(Error:any){
+    this.logout();
+    return of (false);
+
+  }
+}
